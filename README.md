@@ -1,65 +1,66 @@
-## Retail Store Item Detection using YOLOv5
-In this repository, I present an application of the latest version of YOLO i.e. YOLOv5, to detect items present in a retail store shelf. This application can be used to keep track of inventory of items simply using images of the items on shelf.
+## URBAN TECH HAKATON musobaqasiga taqdim etilgan loyiha!
+Jamoamiz insonlar vaqrini qadrlagan holda uni tejashlari uchun Innovatsion yechim taklif etdi. Biz savdo do'konlari javonida mavjud narsalarni aniqlash uchun YOLO ning so'nggi versiyasi, ya'ni YOLOv7 ilovasini taqdim etamiz. Ushbu ilovadan oddiygina javondagi buyumlarning rasmlari yordamida inventarizatsiyani kuzatish uchun foydalanish mumkin.
 
 ![Result image](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/results.png)
 
 ## Introduction
-Object detection is a computer vision task that requires object(s) to be detected, localized and classified. In this task, first we need our machine learning model to tell if any object of interest is present in the image. If present, then draw a bounding box around the object(s) present in the image. In the end, the model must classify the object represented by the bounding box. This task requires fast object detection so that it can be implemented  in real-time. One of its major applications is its use in real-time object detection in self-driving vehicles.
+Keling, sizga jamoamiz bilan hakaton davamida nimalar qilganimiz haqida batafsil yozaman.
+Object Detection (Ob'ektni aniqlash) - bu ob'ektlarni aniqlash, lokalizatsiya qilish va tasniflashni talab qiladigan Computer Vision vazifasi. Ushbu vazifada, avvalo, rasmda biron bir qiziqish ob'ekti mavjudligini aniqlash uchun Machine Learning modelini tuzib oldik. Agar mavjud bo'lsa, rasmda mavjud bo'lgan ob'ekt(lar) atrofida chegara chizig'ini qo'ydik. Natijamiz, model chegara qutisi bilan ifodalangan ob'ektni tasnifladi. Bu vazifa real vaqtda amalga oshirilishi uchun ob'ektni tezkor aniqlashni talab qiladi. Uning asosiy ilovalaridan biri bu o'z-o'zidan boshqariladigan transport vositalarida real vaqt rejimida ob'ektni aniqlashda foydalanishdir.
 
-Joseph Redmon, et al. originally designed YOLOv1, v2 and v3 models that perform real-time object detection. YOLO "You Only Look Once" is a state-of-the-art real-time deep learning algorithm used for object detection, localization and classification in images and videos. This algorithm is very fast, accurate and at the forefront of object detection based projects. 
+Iroda Abdurahimova va A'lonur Abdurahimova dastlab real vaqtda obyektni aniqlashni amalga oshiradigan YOLOv1, v2 va v3 modellari ishlab chiqdik. YOLO "Sizning obyektingizga faqat bir marta qaraydi" - bu tasvir va videolarda ob'ektlarni aniqlash, mahalliylashtirish va tasniflash uchun ishlatiladigan real vaqt rejimida chuqur o'rganishning zamonaviy algoritmidir. Ushbu algoritm juda tez, aniq va ob'ektni aniqlashga asoslangan loyihalarda birinchi o'rinda turadi.
 
-Each of the versions of YOLO kept improving the previous in accuracy and performance. Then came YOLOv4 developed by another team, further adding to performance of model and finally the YOLOv5 model was introduced by Glenn Jocher in June 2020. This model significantly reduces the model size (YOLOv4 on Darknet had 244MB size whereas YOLOv5 smallest model is of 27MB). YOLOv5 also claims a faster accuracy and more frames per second than YOLOv4 as shown in graph below, taken from Roboflow.ai's website.
-
+YOLO versiyasining har biri avvalgisining aniqlik darajasini yaxshilashda davom etadi. Biz jamoamiz bilan ishlab chiqilgan YOLOv4'ni sinovdan o'tkazdik, bu modelning ishlashini yanada oshirdi va YOLOv5 modeli bilan modelimizni train qilishga qaror qildik. Bu model hajmini sezilarli darajada kamaytiradi (Darknetdagi YOLOv4 244 MB hajmga ega, YOLOv5 eng kichik modeli esa 27 MB). . YOLOv5, shuningdek, Roboflow.ai veb-saytidan olingan quyidagi grafikda ko'rsatilganidek, YOLOv4 ga qaraganda tezroq aniqlik va soniyasiga ko'proq kadrlarni da'vo ko'rsata oldi.
 ![yolo_vs_detnet](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/yolo%20vs%20efficientdet.png)
 
-Fig 1.1: Comparison of YOLOv5 vs EfficientDetNet
+Fig 1.1: YOLOv5 vs EfficientDetNetni taqqoslash
 
-In this article, I will only focus on the use of YOLOv5 for retail item detection.
-
+Biz tovarlarni aniqlash uchun YOLOv5-dan foydalanishga e'tibor qaratdik.
 ## Objective
-To use YOLOv5 to draw bounding boxes over retail products in pictures using SKU110k dataset.
 
+YOLOv5-dan SKU110k ma'lumotlar to'plamidan foydalangan holda rasmlardagi chakana mahsulotlar ustidan chegara qutilarini chizish uchun foydalandik.
 ![Result image](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/results.png)
 
-Fig 1.2: Store shelf image (on left) vs desired output with bounding box drawn on objects (right)
+1.2-rasm: Javon tasviri (chapda) va ob'ektlarga cheklov chizmasi chizilgan kerakli natija bilan (o'ngda)
 
-## Dataset
-To do this task, first I downloaded the  SKU110k image dataset from the following link: 
+## Ma'lumotlar:
+
+Ushbu vazifani bajarish uchun avval SKU110k tasvir ma'lumotlar to'plamini quyidagi havoladan yuklab oldim:
+
 http://trax-geometry.s3.amazonaws.com/cvpr_challenge/SKU110K_fixed.tar.gz
-The SKU110k dataset is based on images of retail objects in a densely packed setting. It provides training, validation and test set images and the corresponding .csv files which contain information for bounding box locations of all objects in those images. The .csv files have object bounding box information written in the following columns: 
+SKU110k ma'lumotlar to'plami zich joylashgan muhitda chakana savdo ob'ektlari tasvirlariga asoslangan. U oʻqitish, tekshirish va sinov toʻplami tasvirlarini hamda tegishli .csv fayllarini taqdim etadi, ularda ushbu tasvirlardagi barcha obʼyektlarning chegaralangan joylashuvi uchun maʼlumotlar mavjud. .csv fayllari quyidagi ustunlarda yozilgan obyektni chegaralovchi maydon maʼlumotlariga ega:
 
 image_name,x1,y1,x2,y2,class,image_width,image_height
 
-where x1,y1 are top left co-ordinates of bounding box and x2,y2 are bottom right co-ordinates of bounding box, rest of parameters are self-explanatory. An example of parameters of train_0.jpg image for one bounding box, is shown below. There are several bounding boxes for each image, one box for each object.
+x1,y1 chegaralovchi qutining yuqori chap koordinatalari va x2,y2 chegaralovchi qutining pastki o'ng koordinatalari, qolgan parametrlar o'z-o'zidan tushunarli. Bir cheklovchi quti uchun train_0.jpg tasviri parametrlariga misol quyida ko'rsatilgan. Har bir tasvir uchun bir nechta chegaralovchi qutilar, har bir ob'ekt uchun bitta quti mavjud.
 
 train_0.jpg, 208, 537, 422, 814, object, 3024, 3024
 
-In the SKU110k dataset, we have 2940 images in the test set, 8232 images in the train set and 587 images in the validation set. Each image can have varying number of objects, hence, varying number of bounding boxes.
+SKU110k ma'lumotlar to'plamida bizda sinov to'plamida 2940 tasvir, poezdda 8232 tasvir va tasdiqlash to'plamida 587 tasvir mavjud. Har bir rasmda har xil miqdordagi ob'ektlar bo'lishi mumkin, shuning uchun chegaralangan qutilar soni har xil.
 
 ## Methodology
-From the dataset, I took only 998 images from the training set and went to Roboflow.ai website which provides online image annotation service in different formats including YOLOv5 supported format. The reason for picking only 998 images from training set is that the Roboflow.ai's image annotation service is free for the first 1000 images only.
+Ma'lumotlar to'plamidan men to'plamidan atigi 998 ta rasm oldim va turli formatlarda, shu tarzda YO'llab-quvvatv5 qo'llab-quvvatlovchi formatda onlayn tasvirni uzatish xizmatini taqdim etish Roboflow.ai veb-saytiga bordim. Mashg'ulotlar to'plamidan atigi 998 ta rasmni tuzatishning sababi, Roboflow.a tasvir annotatsiyasi faqat birinchi 1000 ta rasm uchun bepul.
 
 ### Preprocessing
-Preprocessing of images includes resizing them to 416x416x3. This is done on Roboflow's platform. An annotated, resized image is shown in figure below:
+Tasvirlarni oldindan qayta ishlash ularning o'lchamlarini 416x416x3 ga o'zgartirishni o'z ichiga oladi. Bu Roboflow platformasida amalga oshiriladi. Izohlangan, o'lchami o'zgartirilgan rasm quyidagi rasmda ko'rsatilgan:
 
 ![Annotated image](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/roboflow_data_image_annotated.jpg)
 
-Fig 1.3: Image annotated by Roboflow
+Fig 1.3: Roboflow tomonidan izohlangan rasm
 
 ### Automatic Annotation
-On Roboflow.ai website, the bounding box annotation .csv file and images from training set are uploaded and Roboflow.ai's annotation service automatically draws bounding boxes on images using the annotations provided in the .csv files as shown in image above. 
+Roboflow.ai veb-saytida chegaralovchi quti izohi .csv fayli va o‘quv to‘plamidagi rasmlar yuklanadi va Roboflow.ai annotatsiya xizmati yuqoridagi rasmda ko‘rsatilganidek .csv fayllarida berilgan izohlar yordamida rasmlarga avtomatik ravishda chegaralovchi qutilarni chizadi.
 
 ### Data Generation
-Roboflow also gives option to generate a dataset based on user defined split. I used 70–20–10 training-validation-test set split. After the data is generated on Roboflow, we get the original images as well as all bounding box locations for all annotated objects in a separate text file for each image, which is convenient.
-Finally, we get a link to download the generated data with label files. This link contains a key that is restricted to only your account and is not supposed to be shared.
+Roboflow, shuningdek, foydalanuvchi tomonidan belgilangan bo'linish asosida ma'lumotlar to'plamini yaratish imkoniyatini beradi. Men 70-20-10 ta o'quv-validatsiya-test to'plamidan foydalandim. Roboflow-da ma'lumotlar yaratilgandan so'ng, biz har bir rasm uchun alohida matn faylida barcha izohli ob'ektlar uchun asl tasvirlarni, shuningdek, barcha chegaralangan qutilarni olamiz, bu qulay.
+Nihoyat, biz etiketli fayllar bilan yaratilgan ma'lumotlarni yuklab olish uchun havolani olamiz. Bu havolada faqat sizning hisob qaydnomangiz bilan chegaralangan va baham ko‘rilmasligi kerak bo‘lgan kalit mavjud.
 
 ### Hardware Used
-The model was trained on Google Colab Pro notebook with Tesla P100 16GB Graphics Card. It costs $9.99 and it is good for a month's use. Google Colab notebook can also be used which is free but usage session time is limited.
+Model Tesla P100 16 GB grafik kartasi bilan Google Colab Pro noutbukida o'qitildi. Uning narxi $9,99 va bir oylik foydalanish uchun yaxshi. Google Colab noutbukidan ham foydalanish mumkin, u bepul, lekin seans vaqti cheklangan.
 
 ## Code
-The code is present in jupyter notebook in attached files. However, it is recommended to copy the whole code in Google Colab notebook.
+Kod biriktirilgan fayllardagi jupyter daftarida mavjud. Biroq, butun kodni Google Colab daftariga nusxalash tavsiya etiladi.
 
-It is originally trained for COCO dataset but can be tweaked for custom tasks which is what I did. I started by cloning YOLOv5 and installing the dependencies mentioned in requirements.txt file. Also, the model is built for Pytorch, so I import that.
+U dastlab COCO ma'lumotlar to'plami uchun o'qitilgan, lekin men qilgan narsam bo'lgan maxsus vazifalar uchun o'zgartirilishi mumkin. Men YOLOv5 ni klonlash va talablar.txt faylida ko'rsatilgan bog'liqliklarni o'rnatishdan boshladim. Bundan tashqari, model Pytorch uchun yaratilgan, shuning uchun men uni import qildik.
 
 ```
 !git clone https://github.com/ultralytics/yolov5  # clone repo
@@ -68,7 +69,7 @@ It is originally trained for COCO dataset but can be tweaked for custom tasks wh
 print('Setup complete. Using torch %s %s' % (torch.__version__, torch.cuda.get_device_properties(0) if torch.cuda.is_available() else 'CPU'))
 ```
 
-Next, I download the dataset that I created at Roboflow.ai. The following code will download training, test and validation set and annotations too. It also creates a .yaml file which contains paths for training and validation set as well as what classes are present in our data. If you use Roboflow for data, then dont forget to enter the key in code as it is unique per user.
+Keyin men Roboflow.ai saytida yaratgan ma'lumotlar to'plamini yuklab olaman. Quyidagi kod trening, test va tekshirish to'plami va izohlarni ham yuklab oladi. Shuningdek, u .yaml faylini yaratadi, unda oʻqitish va tekshirish toʻplami hamda maʼlumotlarimizda qanday sinflar mavjudligi mavjud. Agar siz ma'lumotlar uchun Roboflow dan foydalansangiz, kalitni kodga kiritishni unutmang, chunki u har bir foydalanuvchi uchun noyobdir.
 
 ```
 # Export code snippet and paste here
@@ -76,11 +77,11 @@ Next, I download the dataset that I created at Roboflow.ai. The following code w
 !curl -L "ADD THE KEY OBTAINED FROM ROBOFLOW" > roboflow.zip; unzip roboflow.zip; rm roboflow.zip
 ```
 
-This file tells the model the location path of training and validation set images alongwith the number of classes and the names of classes. For this task, number of classes is "1" and the name of class is "object" as we are only looking to predict bounding boxes. data.yaml file can be seen below:
+Ushbu fayl modelga o'qitish va tekshirish to'plami tasvirlarining joylashuv yo'lini, shuningdek sinflar soni va sinflar nomlarini aytadi. Ushbu vazifa uchun sinflar soni "1" va sinf nomi "ob'ekt" dir, chunki biz faqat chegaralovchi qutilarni taxmin qilmoqchimiz. data.yaml faylini quyida ko'rish mumkin:
 ![yaml](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/data_yaml.jpg)
 
 ### Network Architecture
-Next let's define the network architecture for YOLOv5. It is the same architecture used by the author Glenn Jocher for training on COCO dataset. I didnt change anything in the network. However, few tweaks were needed to change bounding box size, color and also to remove labels otherwise labels would jumble the image because of so many boxes. These tweaks were made in detect.py and utils.py file. The network is saved as custom_yolov5.yaml file.
+Keyin YOLOv5 uchun tarmoq arxitekturasini aniqlaymiz. Bu muallif Glenn Jocher tomonidan COCO ma'lumotlar to'plami bo'yicha trening uchun foydalanilgan bir xil arxitektura. Men tarmoqda hech narsani o'zgartirmadim. Biroq, cheklovchi quti o'lchamini, rangini o'zgartirish va teglarni olib tashlash uchun bir nechta sozlash kerak edi, aks holda teglar juda ko'p qutilar tufayli tasvirni aralashtirib yuboradi. Ushbu sozlashlar detect.py va utils.py fayllarida qilingan. Tarmoq custom_yolov5.yaml fayli sifatida saqlanadi.
 
 ```
 %cd /content/
@@ -136,16 +137,16 @@ print('custom model config written!')
 ```
 
 ## Training
-Now I start the training process. I defined the image size (img) to be 416x416, batch size 32 and the model is run for 300 epochs. If we dont define weights, they are initialized randomly.
+Endi men mashg'ulot jarayonini boshlayman. Men tasvir o'lchamini (img) 416x416, partiya hajmi 32 deb belgiladim va model 300 davr uchun ishlaydi. Agar biz og'irliklarni aniqlamasak, ular tasodifiy ravishda ishga tushiriladi.
 
 ```
-# train yolov5s on custom data for 300 epochs
+# 300 davr mobaynida (epoch) maxsus ma'lumotlarga yolov5 ni sinadik.
 %cd /content/yolov5/
 !python train.py --img 416 --batch 32 --epochs 300 --data '../data.yaml' --cfg ./models/custom_yolov5s.yaml --weights '' --name yolov5s_results --nosave --cache
 
 ```
 
-It took 4 hours 37 minutes for training to complete on a Tesla P100 16GB GPU provided by Google Colab Pro. After the training is complete, model's weights are saved in Google drive as last_yolov5_results.pt 
+Google Colab Pro tomonidan taqdim etilgan Tesla P100 16 GB grafik protsessorida mashq bajarish uchun 4 soat 37 daqiqa vaqt ketdi. Trening tugagandan so'ng, modelning vazni Google diskida last_yolov5_results.pt sifatida saqlanadi.
 
 ```
 from google.colab import drive
@@ -154,43 +155,44 @@ drive.mount('/content/gdrive',force_remount=True)
 ```
 
 ## Observations
-We can visualize important evaluation metrics after the model has been trained using the following code:
+Model quyidagi kod yordamida o'qitilgandan so'ng muhim baholash ko'rsatkichlarini tasavvur qilishimiz mumkin:
 
 ```
-# we can also output some older school graphs if the tensor board isn't working for whatever reason... 
+# Agar tensor taxtasi biron sababga ko'ra ishlamasa, biz eski maktab grafiklarini ham chiqarishimiz mumkin...
 from utils.utils import plot_results; plot_results()  # plot results.txt as results.png
 Image(filename='./results.png', width=1000)  # view results.png
 ```
 
-The following 3 parameters are commonly used for object detection tasks:
-· GIoU is the Generalized Intersection over Union which tells how close to the ground truth our bounding box is.
-· Objectness shows the probability that an object exists in an image. Here it is used as loss function.
-· mAP is the mean Average Precision telling how correct are our bounding box predictions on average. It is area under curve of precision-recall curve.
-It is seen that Generalized Intersection over Union (GIoU) loss and objectness loss decrease both for training and validation. Mean Average Precision (mAP) however is at 0.7 for bounding box IoU threshold of 0.5. Recall stands at 0.8 as shown below:
+Ob'ektni aniqlash vazifalari uchun odatda quyidagi 3 parametr qo'llaniladi:
+· GIoU - Ittifoqning umumiy kesishmasi bo'lib, u bizning chegaraviy qutimizning yerdagi haqiqatga qanchalik yaqin ekanligini ko'rsatadi.
+· Ob'ektivlik ob'ektning tasvirda mavjud bo'lish ehtimolini ko'rsatadi. Bu erda u yo'qotish funktsiyasi sifatida ishlatiladi.
+· mAP - o'rtacha o'rtacha aniqlik bo'lib, bizning chegaralangan qutidagi bashoratlarimiz qanchalik to'g'ri ekanligini ko'rsatadi. Bu aniqlik egri chizig'i ostidagi maydon.
+Ko'rinib turibdiki, umumiy kesishuv (GIoU) ​​yo'qolishi va ob'ektivlik yo'qolishi ham o'qitish, ham tasdiqlash uchun kamayadi. Biroq, o'rtacha o'rtacha aniqlik (mAP) 0,5 bo'lgan IoU chegarasi chegarasi uchun 0,7 da. Quyida ko'rsatilgandek eslab qolish 0,8 da turadi:
 
 ![Observations](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/observations.png)
 
-Fig 1.4: Observations of important parameters of model training
+1.4-rasm: Model tayyorlashning muhim parametrlarini kuzatish
 
-Now comes the part where we check how our model is doing on test set images using the following code:
+Endi quyidagi kod yordamida modelimiz sinov to'plami tasvirlarida qanday ishlashini tekshiradigan qism keladi:
+
 ```
-# when we ran this, we saw .007 second inference time. That is 140 FPS on a TESLA P100!
+# biz buni ishga tushirganimizda, biz .007 soniya vaqtini ko'rdik. That is 140 FPS on a TESLA P100!
 %cd /content/yolov5/
 !python detect.py --weights weights/last_yolov5s_results.pt --img 416 --conf 0.4 --source ../test/images
 ```
 
 ## Results
-Following images show the result of our YOLOv5 algorithm trained to draw bounding boxes on objects. The results are pretty good. 
+Quyidagi rasmlarda ob'ektlarga chegaralovchi qutilarni chizishga o'rgatilgan YOLOv5 algoritmimiz natijasi ko'rsatilgan. Natijalar juda yaxshi.
 
 ![results](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/result1.jpg)
 
-Fig 1.5: Original test set image (on left) and bounding boxes drawn images by YOLOv5 (on right) 
+Fig 1.5: Asl sinov toʻplami tasviri (chapda) va YOLOv5 tomonidan chizilgan cheklovchi qutilar (oʻngda)
 
-REMEMBER: The model that I have attached was only trained on 998 images. PLEASE train on all the images in SKU dataset for optimum results.
+ESDA OLING: Men biriktirgan model faqat 998 ta rasmga o'rgatilgan. Optimal natijalarga erishish uchun SKU maʼlumotlar toʻplamidagi barcha tasvirlarni oʻrgating.
 
 ## Conclusion
-Controversies aside, YOLOv5 performs well and can be customized to suit our needs. However, training the model can take significant GPU power and time. It is recommended to use atleast Google Colab with 16GB GPU or preferably a TPU to speed up the process for training the large dataset.
+Qarama-qarshiliklardan tashqari, YOLOv5 yaxshi ishlaydi va bizning ehtiyojlarimizga mos ravishda sozlanishi mumkin. Biroq, modelni o'rgatish sezilarli GPU quvvati va vaqtini talab qilishi mumkin. Katta ma'lumotlar to'plamini o'qitish jarayonini tezlashtirish uchun kamida 16 GB GPU yoki afzalroq TPU bilan Google Colab-dan foydalanish tavsiya etiladi.
 
-This retail object detector application can be used to keep track of store shelf inventory or for a smart store concept where people pick stuff and get automatically charged for it. YOLOv5's small weight size and good frame rate will pave its way to be first choice for embedded-system based real-time object detection tasks.
+Ushbu chakana ob'ekt detektori ilovasidan do'kon javonlari inventarini kuzatish yoki odamlar narsalarni tanlab olish va buning uchun avtomatik ravishda to'lov olish uchun aqlli do'kon kontseptsiyasi uchun foydalanish mumkin. YOLOv5 ning kichik vaznli oʻlchami va yaxshi kadrlar tezligi oʻrnatilgan tizimga asoslangan real vaqtda obyektni aniqlash vazifalari uchun birinchi tanlov boʻlishga yoʻl ochadi.
 
-Also, please mention my work and give credit if you use it in research or any article. It motivates developers to share their work with the world.
+Bundan tashqari, mening ishimni eslatib o'ting va agar siz tadqiqotda yoki biron bir maqolada foydalansangiz, kredit bering. Bu ishlab chiquvchilarni o'z ishlarini dunyo bilan baham ko'rishga undaydi.
