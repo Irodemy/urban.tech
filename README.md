@@ -1,11 +1,11 @@
-## URBAN TECH HAKATON musobaqasi <spectrum> jamoasi!
-Jamoamiz insonlar vaqrini qadrlagan holda uni tejashlari uchun Innovatsion yechim taklif etdi. Biz savdo do'konlari javonida mavjud narsalarni aniqlash uchun YOLO ning so'nggi versiyasi, ya'ni YOLOv7 ilovasini taqdim etamiz. Ushbu ilovadan oddiygina javondagi buyumlarning rasmlari yordamida inventarizatsiyani kuzatish uchun foydalanish mumkin.
+## URBAN TECH HAKATON musobaqasi *spectrum* jamoasi!
+Jamoamiz insonlarning vaqtlarini qadrlagan holda uni tejashlari uchun Innovatsion yechim taklif etdi. Biz savdo do'konlari javonida mavjud narsalarni aniqlash uchun YOLO ning so'nggi versiyasi, ya'ni YOLOv7 ilovasini taqdim etamiz. Ushbu ilovadan oddiygina javondagi buyumlarning rasmlari yordamida inventarizatsiyani kuzatish uchun foydalanish mumkin.
 
 ![Result image](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/results.png)
 
-## Introduction
+## Kirish
 Keling, sizga jamoamiz bilan hakaton davamida nimalar qilganimiz haqida batafsil yozaman.
-Object Detection (Ob'ektni aniqlash) - bu ob'ektlarni aniqlash, lokalizatsiya qilish va tasniflashni talab qiladigan Computer Vision vazifasi. Ushbu vazifada, avvalo, rasmda biron bir qiziqish ob'ekti mavjudligini aniqlash uchun Machine Learning modelini tuzib oldik. Agar mavjud bo'lsa, rasmda mavjud bo'lgan ob'ekt(lar) atrofida chegara chizig'ini qo'ydik. Natijamiz, model chegara qutisi bilan ifodalangan ob'ektni tasnifladi. Bu vazifa real vaqtda amalga oshirilishi uchun ob'ektni tezkor aniqlashni talab qiladi. Uning asosiy ilovalaridan biri bu o'z-o'zidan boshqariladigan transport vositalarida real vaqt rejimida ob'ektni aniqlashda foydalanishdir.
+Object Detection (Ob'ektni aniqlash) - bu ob'ektlarni aniqlash, lokalizatsiya qilish va tasniflashni talab qiladigan Computer Vision vazifasi. Ushbu vazifada, avvalo, rasmda biror bir ob'ektning mavjudligini aniqlash uchun Machine Learning modelini tuzib oldik. Agar mavjud bo'lsa, rasmda mavjud bo'lgan ob'ekt(lar) atrofida chegara chizig'ini qo'ydik. Natijamiz, model chegara qutisi bilan ifodalangan ob'ektni tasnifladi. Bu vazifa real vaqtda amalga oshirilishi uchun ob'ektni tezkor aniqlashni talab qiladi. Uning asosiy ilovalaridan biri bu o'z-o'zidan boshqariladigan transport vositalarida real vaqt rejimida ob'ektni aniqlashda foydalanishdir.
 
 Iroda Abdurahimova va A'lonur Abdurahimova dastlab real vaqtda obyektni aniqlashni amalga oshiradigan YOLOv1, v2 va v3 modellari ishlab chiqdik. YOLO "Sizning obyektingizga faqat bir marta qaraydi" - bu tasvir va videolarda ob'ektlarni aniqlash, mahalliylashtirish va tasniflash uchun ishlatiladigan real vaqt rejimida chuqur o'rganishning zamonaviy algoritmidir. Ushbu algoritm juda tez, aniq va ob'ektni aniqlashga asoslangan loyihalarda birinchi o'rinda turadi.
 
@@ -15,9 +15,9 @@ YOLO versiyasining har biri avvalgisining aniqlik darajasini yaxshilashda davom 
 Fig 1.1: YOLOv5 vs EfficientDetNetni taqqoslash
 
 Biz tovarlarni aniqlash uchun YOLOv5-dan foydalanishga e'tibor qaratdik.
-## Objective
+## Maqsad
 
-YOLOv5-dan SKU110k ma'lumotlar to'plamidan foydalangan holda rasmlardagi chakana mahsulotlar ustidan chegara qutilarini chizish uchun foydalandik.
+YOLOv5-dan SKU110k ma'lumotlar to'plamidan foydalangan holda rasmlardagi mahsulotlar ustidan chegara qutilarini chizish uchun foydalandik.
 ![Result image](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/results.png)
 
 1.2-rasm: Javon tasviri (chapda) va ob'ektlarga cheklov chizmasi chizilgan kerakli natija bilan (o'ngda)
@@ -37,10 +37,10 @@ train_0.jpg, 208, 537, 422, 814, object, 3024, 3024
 
 SKU110k ma'lumotlar to'plamida bizda sinov to'plamida 2940 tasvir, poezdda 8232 tasvir va tasdiqlash to'plamida 587 tasvir mavjud. Har bir rasmda har xil miqdordagi ob'ektlar bo'lishi mumkin, shuning uchun chegaralangan qutilar soni har xil.
 
-## Methodology
+## Metodologiya
 Ma'lumotlar to'plamidan men to'plamidan atigi 998 ta rasm oldim va turli formatlarda, shu tarzda YO'llab-quvvatv5 qo'llab-quvvatlovchi formatda onlayn tasvirni uzatish xizmatini taqdim etish Roboflow.ai veb-saytiga bordim. Mashg'ulotlar to'plamidan atigi 998 ta rasmni tuzatishning sababi, Roboflow.a tasvir annotatsiyasi faqat birinchi 1000 ta rasm uchun bepul.
 
-### Preprocessing
+### Oldindan ishlov berish
 Tasvirlarni oldindan qayta ishlash ularning o'lchamlarini 416x416x3 ga o'zgartirishni o'z ichiga oladi. Bu Roboflow platformasida amalga oshiriladi. Izohlangan, o'lchami o'zgartirilgan rasm quyidagi rasmda ko'rsatilgan:
 
 ![Annotated image](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/roboflow_data_image_annotated.jpg)
@@ -181,7 +181,7 @@ Endi quyidagi kod yordamida modelimiz sinov to'plami tasvirlarida qanday ishlash
 !python detect.py --weights weights/last_yolov5s_results.pt --img 416 --conf 0.4 --source ../test/images
 ```
 
-## Results
+## Natija
 Quyidagi rasmlarda ob'ektlarga chegaralovchi qutilarni chizishga o'rgatilgan YOLOv5 algoritmimiz natijasi ko'rsatilgan. Natijalar juda yaxshi.
 
 ![results](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/result1.jpg)
@@ -190,7 +190,7 @@ Fig 1.5: Asl sinov toʻplami tasviri (chapda) va YOLOv5 tomonidan chizilgan chek
 
 ESDA OLING: Men biriktirgan model faqat 998 ta rasmga o'rgatilgan. Optimal natijalarga erishish uchun SKU maʼlumotlar toʻplamidagi barcha tasvirlarni oʻrgating.
 
-## Conclusion
+## Hulosa
 Qarama-qarshiliklardan tashqari, YOLOv5 yaxshi ishlaydi va bizning ehtiyojlarimizga mos ravishda sozlanishi mumkin. Biroq, modelni o'rgatish sezilarli GPU quvvati va vaqtini talab qilishi mumkin. Katta ma'lumotlar to'plamini o'qitish jarayonini tezlashtirish uchun kamida 16 GB GPU yoki afzalroq TPU bilan Google Colab-dan foydalanish tavsiya etiladi.
 
 Ushbu chakana ob'ekt detektori ilovasidan do'kon javonlari inventarini kuzatish yoki odamlar narsalarni tanlab olish va buning uchun avtomatik ravishda to'lov olish uchun aqlli do'kon kontseptsiyasi uchun foydalanish mumkin. YOLOv5 ning kichik vaznli oʻlchami va yaxshi kadrlar tezligi oʻrnatilgan tizimga asoslangan real vaqtda obyektni aniqlash vazifalari uchun birinchi tanlov boʻlishga yoʻl ochadi.
