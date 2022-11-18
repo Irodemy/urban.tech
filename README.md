@@ -50,14 +50,14 @@ Fig 1.3: Roboflow tomonidan izohlangan rasm
 ### Automatic Annotation
 Roboflow.ai veb-saytida chegaralovchi quti izohi .csv fayli va o‘quv to‘plamidagi rasmlar yuklanadi va Roboflow.ai annotatsiya xizmati yuqoridagi rasmda ko‘rsatilganidek .csv fayllarida berilgan izohlar yordamida rasmlarga avtomatik ravishda chegaralovchi qutilarni chizadi.
 
-### Data Generation
+### Ma'lumotlar bilan ishlash
 Roboflow, shuningdek, foydalanuvchi tomonidan belgilangan bo'linish asosida ma'lumotlar to'plamini yaratish imkoniyatini beradi. Men 70-20-10 ta o'quv-validatsiya-test to'plamidan foydalandim. Roboflow-da ma'lumotlar yaratilgandan so'ng, biz har bir rasm uchun alohida matn faylida barcha izohli ob'ektlar uchun asl tasvirlarni, shuningdek, barcha chegaralangan qutilarni olamiz, bu qulay.
 Nihoyat, biz etiketli fayllar bilan yaratilgan ma'lumotlarni yuklab olish uchun havolani olamiz. Bu havolada faqat sizning hisob qaydnomangiz bilan chegaralangan va baham ko‘rilmasligi kerak bo‘lgan kalit mavjud.
 
-### Hardware Used
+### Foydalanilgan Hardware'lar
 Model Tesla P100 16 GB grafik kartasi bilan Google Colab Pro noutbukida o'qitildi. Uning narxi $9,99 va bir oylik foydalanish uchun yaxshi. Google Colab noutbukidan ham foydalanish mumkin, u bepul, lekin seans vaqti cheklangan.
 
-## Code
+## Dastur
 Kod biriktirilgan fayllardagi jupyter daftarida mavjud. Biroq, butun kodni Google Colab daftariga nusxalash tavsiya etiladi.
 
 U dastlab COCO ma'lumotlar to'plami uchun o'qitilgan, lekin men qilgan narsam bo'lgan maxsus vazifalar uchun o'zgartirilishi mumkin. Men YOLOv5 ni klonlash va talablar.txt faylida ko'rsatilgan bog'liqliklarni o'rnatishdan boshladim. Bundan tashqari, model Pytorch uchun yaratilgan, shuning uchun men uni import qildik.
@@ -80,7 +80,7 @@ Keyin men Roboflow.ai saytida yaratgan ma'lumotlar to'plamini yuklab olaman. Quy
 Ushbu fayl modelga o'qitish va tekshirish to'plami tasvirlarining joylashuv yo'lini, shuningdek sinflar soni va sinflar nomlarini aytadi. Ushbu vazifa uchun sinflar soni "1" va sinf nomi "ob'ekt" dir, chunki biz faqat chegaralovchi qutilarni taxmin qilmoqchimiz. data.yaml faylini quyida ko'rish mumkin:
 ![yaml](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/data_yaml.jpg)
 
-### Network Architecture
+### Network Tuzilmasi
 Keyin YOLOv5 uchun tarmoq arxitekturasini aniqlaymiz. Bu muallif Glenn Jocher tomonidan COCO ma'lumotlar to'plami bo'yicha trening uchun foydalanilgan bir xil arxitektura. Men tarmoqda hech narsani o'zgartirmadim. Biroq, cheklovchi quti o'lchamini, rangini o'zgartirish va teglarni olib tashlash uchun bir nechta sozlash kerak edi, aks holda teglar juda ko'p qutilar tufayli tasvirni aralashtirib yuboradi. Ushbu sozlashlar detect.py va utils.py fayllarida qilingan. Tarmoq custom_yolov5.yaml fayli sifatida saqlanadi.
 
 ```
@@ -136,7 +136,7 @@ with open('yolov5/models/custom_yolov5s.yaml', 'w') as f:
 print('custom model config written!')
 ```
 
-## Training
+## Mashq (Training)
 Endi men mashg'ulot jarayonini boshlayman. Men tasvir o'lchamini (img) 416x416, partiya hajmi 32 deb belgiladim va model 300 davr uchun ishlaydi. Agar biz og'irliklarni aniqlamasak, ular tasodifiy ravishda ishga tushiriladi.
 
 ```
@@ -154,7 +154,7 @@ drive.mount('/content/gdrive',force_remount=True)
 %cp /content/yolov5/weights/last_yolov5s_results.pt /content/gdrive/My\ Drive
 ```
 
-## Observations
+## Kuzatishlar
 Model quyidagi kod yordamida o'qitilgandan so'ng muhim baholash ko'rsatkichlarini tasavvur qilishimiz mumkin:
 
 ```
