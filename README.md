@@ -1,4 +1,4 @@
-## URBAN TECH HAKATON musobaqasiga taqdim etilgan loyiha!
+## URBAN TECH HAKATON musobaqasi <spectrum> jamoasi!
 Jamoamiz insonlar vaqrini qadrlagan holda uni tejashlari uchun Innovatsion yechim taklif etdi. Biz savdo do'konlari javonida mavjud narsalarni aniqlash uchun YOLO ning so'nggi versiyasi, ya'ni YOLOv7 ilovasini taqdim etamiz. Ushbu ilovadan oddiygina javondagi buyumlarning rasmlari yordamida inventarizatsiyani kuzatish uchun foydalanish mumkin.
 
 ![Result image](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/results.png)
