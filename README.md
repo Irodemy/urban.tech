@@ -18,6 +18,7 @@ Biz tovarlarni aniqlash uchun YOLOv5-dan foydalanishga e'tibor qaratdik.
 ## Maqsad
 
 YOLOv5-dan SKU110k ma'lumotlar to'plamidan foydalangan holda rasmlardagi mahsulotlar ustidan chegara qutilarini chizish uchun foydalandik.
+
 ![Result image](https://github.com/shayanalibhatti/Retail-Store-Item-Detection-using-YOLOv5/blob/master/results.png)
 
 1.2-rasm: Javon tasviri (chapda) va ob'ektlarga cheklov chizmasi chizilgan kerakli natija bilan (o'ngda)
